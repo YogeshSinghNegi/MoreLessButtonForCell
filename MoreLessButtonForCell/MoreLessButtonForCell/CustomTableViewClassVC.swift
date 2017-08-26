@@ -2,7 +2,7 @@
 //  CustomTableViewClassVC.swift
 //  MoreLessButtonForCell
 //
-//  Created by yogesh singh negi on 24/08/17.
+//  Created by yogesh singh negi on 25/08/17.
 //  Copyright © 2017 appinventiv. All rights reserved.
 //
 
@@ -17,8 +17,10 @@ class CustomTableViewClassVC: UIViewController {
 //=============================================================//
 //MARK: Stored Property
 //=============================================================//
-
-    var nameArray = [
+    
+    var myIndexPathRowArray = [Int]()
+    
+    let nameArray = [
         """
  WhatsApp Messenger is a FREE messaging app available for Android and other smartphones. WhatsApp uses your phone's Internet connection (4G/3G/2G/EDGE or Wi-Fi, as available) to let you message and call friends and family. Switch from SMS to WhatsApp to send and receive messages, calls, photos, videos, documents, and Voice Messages.
  """,
@@ -52,8 +54,7 @@ Get the official YouTube app for Android phones and tablets. See what the world 
 //=============================================================//
     
     @IBOutlet weak var customTableView: UITableView!
-    
-    
+   
 //=============================================================//
 //MARK: View Methods
 //=============================================================//
@@ -64,11 +65,29 @@ Get the official YouTube app for Android phones and tablets. See what the world 
         self.customTableView.delegate = self
         self.customTableView.dataSource = self
         self.navigationItem.title = "Play Store Apps"
+        
+        //Setting Initial Value for myTndexPathRowArray
+        for tempIndex in 0...(nameArray.count - 1){
+            myIndexPathRowArray.insert(nameArray.count, at: tempIndex)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+//=============================================================//
+//MARK: Expanding Selected Rows
+//=============================================================//
+    
+    @IBAction func moreBtnTapped(_ sender: UIButton) {
+        
+        guard let tableCell = self.getCell(button: sender) as? CellForRowClass else {fatalError()}
+        guard let indexPath = self.customTableView.indexPath(for: tableCell) else {fatalError()}
+        self.myIndexPathRowArray[indexPath.row] = indexPath.row
+        customTableView.reloadData()
+        
     }
 
 }
@@ -105,10 +124,27 @@ extension CustomTableViewClassVC: UITableViewDelegate,UITableViewDataSource{
 //=============================================================//
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == myIndexPathRowArray[indexPath.row]{
+                return UITableViewAutomaticDimension
+            }
         return 100
     }
     
+//=============================================================//
+//MARK: User Define Method for Getting IndexPath
+//=============================================================//
     
+    func getCell(button: UIButton) -> UITableViewCell{
+        var cell : UIView = button
+        while !(cell is CellForRowClass) {
+            if let super_view = cell.superview {
+                cell = super_view
+            }else{}
+        }
+        guard let tableCell = cell as? CellForRowClass else {fatalError()}
+        return tableCell
+    }
   
 }
 

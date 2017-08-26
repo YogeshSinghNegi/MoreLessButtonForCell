@@ -32,17 +32,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoH-bH-ESb">
-                                                    <rect key="frame" x="20" y="11" width="37.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="305" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmG-pf-Gsv">
+                                                    <rect key="frame" x="302" y="8" width="73" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <state key="normal" title="More"/>
+                                                    <connections>
+                                                        <action selector="moreBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Goc-8h-tvd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="YmG-pf-Gsv" firstAttribute="bottom" secondItem="eoH-bH-ESb" secondAttribute="bottom" constant="3" id="6i3-nw-UQ1"/>
                                                 <constraint firstItem="eoH-bH-ESb" firstAttribute="top" secondItem="Zqr-LQ-py8" secondAttribute="top" constant="11" id="8rL-as-DE0"/>
                                                 <constraint firstAttribute="bottom" secondItem="eoH-bH-ESb" secondAttribute="bottom" constant="11.5" id="DVy-am-Opy"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eoH-bH-ESb" secondAttribute="trailing" constant="20" symbolic="YES" id="JI5-vw-b6l"/>
                                                 <constraint firstItem="eoH-bH-ESb" firstAttribute="leading" secondItem="Zqr-LQ-py8" secondAttribute="leading" constant="20" id="Z75-h2-T8S"/>
+                                                <constraint firstAttribute="trailing" secondItem="YmG-pf-Gsv" secondAttribute="trailing" id="jlz-UJ-tGA"/>
+                                                <constraint firstItem="YmG-pf-Gsv" firstAttribute="leading" secondItem="eoH-bH-ESb" secondAttribute="trailing" constant="-23" id="kc7-Zj-yS0"/>
+                                                <constraint firstAttribute="trailing" secondItem="eoH-bH-ESb" secondAttribute="trailing" constant="50" id="oSY-Ne-XXe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
