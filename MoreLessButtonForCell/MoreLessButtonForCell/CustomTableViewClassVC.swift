@@ -68,7 +68,7 @@ class CustomTableViewClassVC: UIViewController {
         self.customTableView.dataSource = self
         self.navigationItem.title = "Play Store Apps"
         
-        //Setting Default Initial Value for myTndexPathRowArray
+        //Setting Default Initial Value for myTndexPathRowArray and moreBtnNameTitle
         for tempIndex in 0...(nameArray.count - 1){
             self.myIndexPathRowArray.insert(self.nameArray.count, at: tempIndex)
             self.moreBtnNameTitle.insert("More", at: tempIndex)
