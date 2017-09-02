@@ -74,11 +74,6 @@ class CustomTableViewClassVC: UIViewController {
             self.moreBtnNameTitle.insert("More", at: tempIndex)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 //=============================================================//
 //MARK: Expanding OR Contracting Selected Rows - Using More OR Less Button
@@ -96,8 +91,7 @@ class CustomTableViewClassVC: UIViewController {
             self.myIndexPathRowArray[indexPath.row] = self.nameArray.count
             self.moreBtnNameTitle[indexPath.row] = "More"
         }
-        
-        self.customTableView.reloadData()
+         self.customTableView.reloadData()
         
     }
 
@@ -152,9 +146,9 @@ extension CustomTableViewClassVC: UITableViewDelegate,UITableViewDataSource{
         while !(cell is CellForRowClass) {
             if let super_view = cell.superview {
                 cell = super_view
-            }else{}
+            }
         }
-        guard let tableCell = cell as? CellForRowClass else {fatalError()}
+        guard let tableCell = cell as? CellForRowClass else { fatalError() }
         return tableCell
     }
   
@@ -164,7 +158,7 @@ extension CustomTableViewClassVC: UITableViewDelegate,UITableViewDataSource{
 //MARK: Class for Cell Label
 //=============================================================//
 
-class CellForRowClass: UITableViewCell{
+class CellForRowClass: UITableViewCell {
     
 //=============================================================//
 //MARK: TableView IBOutlet
