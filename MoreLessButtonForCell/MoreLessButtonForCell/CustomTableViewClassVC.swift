@@ -15,13 +15,13 @@ import UIKit
 class CustomTableViewClassVC: UIViewController {
     
 //=============================================================//
-//MARK: Stored Property
+//MARK: Stored Properties
 //=============================================================//
     
     var myIndexPathRowArray = [Int]()
-    
+    // Stores the Title of the MoreORLes Button
     var moreBtnNameTitle = [String]()
-    
+    // Array for displaying TableView Content
     let nameArray = [
         """
  1. WhatsApp Messenger is a FREE messaging app available for Android and other smartphones. WhatsApp uses your phone's Internet connection (4G/3G/2G/EDGE or Wi-Fi, as available) to let you message and call friends and family. Switch from SMS to WhatsApp to send and receive messages, calls, photos, videos, documents, and Voice Messages.
@@ -64,12 +64,14 @@ class CustomTableViewClassVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        // Setting Delegate and DataSouce
         self.customTableView.delegate = self
         self.customTableView.dataSource = self
+        // Setting Title Of Navigation Item
         self.navigationItem.title = "Play Store Apps"
         
         //Setting Default Initial Value for myTndexPathRowArray and moreBtnNameTitle
-        for tempIndex in 0...(nameArray.count - 1){
+        for tempIndex in 0...(self.nameArray.count - 1){
             self.myIndexPathRowArray.insert(self.nameArray.count, at: tempIndex)
             self.moreBtnNameTitle.insert("More", at: tempIndex)
         }
@@ -80,18 +82,23 @@ class CustomTableViewClassVC: UIViewController {
 //=============================================================//
     
     @IBAction func moreBtnTapped(_ sender: UIButton) {
-        
-        guard let tableCell = self.getCell(button: sender) as? CellForRowClass else {fatalError()}
-        guard let indexPath = self.customTableView.indexPath(for: tableCell) else {fatalError()}
+        // Getting TableCell for the current Selected Row
+        guard let tableCell = self.getCell(button: sender) as? CellForRowClass else {fatalError("Cell failed to load on MoreORLess Button")}
+        guard let indexPath = self.customTableView.indexPath(for: tableCell) else {fatalError("IndexPath failed to load on MoreORLess Button")}
         if tableCell.moreBtnName.currentTitle! == "More"{
+            // Storing the index of the selected row
             self.myIndexPathRowArray[indexPath.row] = indexPath.row
+            // Changing the Title of the MoreOrLess Button on clicking it
             self.moreBtnNameTitle[indexPath.row] = "Less"
         }
         else if tableCell.moreBtnName.currentTitle! == "Less"{
+            // Storing the dummy value in the current index
             self.myIndexPathRowArray[indexPath.row] = self.nameArray.count
+            // Changing the Title of the MoreOrLess Button on clicking it
             self.moreBtnNameTitle[indexPath.row] = "More"
         }
-         self.customTableView.reloadData()
+        // Reloading only those rows which are selected
+         self.customTableView.reloadRows(at: [indexPath], with: .automatic)
         
     }
 
@@ -132,6 +139,7 @@ extension CustomTableViewClassVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.row == self.myIndexPathRowArray[indexPath.row]{
+                // Setting the rows with Automatic Dimension
                 return UITableViewAutomaticDimension
             }
         return 100
